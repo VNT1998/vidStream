@@ -10,13 +10,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Netflix UI',
-      debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: false, //removing the debug banner at the top
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         scaffoldBackgroundColor: Colors.black,
       ),
-      home: HomeScreen(),
+      home: NavScreen(),
     );
   }
 }
