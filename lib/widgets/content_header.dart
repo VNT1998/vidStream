@@ -17,10 +17,49 @@ class ContentHeader extends StatelessWidget {
   }
 }
 
-class _CustomHeaderMobile extends StatelessWidget {
+class _CustomHeaderMobile extends StatefulWidget {
   final Content featuredContent;
 
   const _CustomHeaderMobile({Key key, this.featuredContent}) : super(key: key);
+
+  @override
+  __CustomHeaderMobileState createState() => __CustomHeaderMobileState();
+}
+
+class __CustomHeaderMobileState extends State<_CustomHeaderMobile> {
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.black.withOpacity(0.4),
+          title: Center(child: Text('Info')),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text(
+                  'A lonely young woman, Sintel, helps and befriends a dragon,whom she calls Scales. But when he is kidnapped by an adult dragon, Sintel decides to embark on a dangerous quest to find her lost friend Scales.',
+                  style: Theme.of(context).textTheme.headline6,
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text(
+                'Close',
+                style: Theme.of(context).textTheme.headline6,
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +70,7 @@ class _CustomHeaderMobile extends StatelessWidget {
           height: 500.0,
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage(featuredContent.imageUrl),
+              image: AssetImage(widget.featuredContent.imageUrl),
               fit: BoxFit.cover,
             ),
           ),
@@ -47,7 +86,8 @@ class _CustomHeaderMobile extends StatelessWidget {
         Positioned(
           bottom: 110.0,
           child: SizedBox(
-              width: 250.0, child: Image.asset(featuredContent.titleImageUrl)),
+              width: 250.0,
+              child: Image.asset(widget.featuredContent.titleImageUrl)),
         ),
         Positioned(
             left: 0,
@@ -60,11 +100,11 @@ class _CustomHeaderMobile extends StatelessWidget {
                     icon: Icons.add,
                     title: 'List',
                     onTap: () => print("Mylist")),
-                _PlayButton(),
+                CustomIconTextButton(iconName: Icons.play_arrow, title: "Play"),
                 VerticalIconButton(
                     icon: Icons.info_outline,
                     title: 'Info',
-                    onTap: () => print("Info")),
+                    onTap: () => _showMyDialog()),
               ],
             ))
       ],
@@ -139,6 +179,7 @@ class __CustomHeaderDesktopState extends State<_CustomHeaderDesktop> {
                   style: const TextStyle(
                       color: Colors.white,
                       fontSize: 18.0,
+                      fontFamily: 'Raleway',
                       fontWeight: FontWeight.w500,
                       shadows: [
                         Shadow(
@@ -151,28 +192,15 @@ class __CustomHeaderDesktopState extends State<_CustomHeaderDesktop> {
                 const SizedBox(width: 20.0),
                 Row(
                   children: [
-                    _PlayButton(),
+                    CustomIconTextButton(
+                      iconName: Icons.play_arrow,
+                      title: "Play",
+                    ),
                     const SizedBox(
                       width: 16.0,
                     ),
-                    ElevatedButton.icon(
-                      style: ElevatedButton.styleFrom(
-                          primary: Colors.transparent,
-                          side: BorderSide(width: 1.0, color: Colors.white),
-                          elevation: 10.0),
-                      onPressed: () => print("moreinfo"),
-                      //color: Colors.white,
-                      icon: const Icon(
-                        Icons.info_outline,
-                      ),
-                      label: const Text(
-                        'More Info',
-                        style: TextStyle(
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ),
+                    CustomIconTextButton(
+                        title: "More Info", iconName: Icons.info_outline),
                     if (_videoController.value.isInitialized)
                       IconButton(
                         icon:
@@ -200,28 +228,5 @@ class __CustomHeaderDesktopState extends State<_CustomHeaderDesktop> {
   void dispose() {
     _videoController.dispose();
     super.dispose();
-  }
-}
-
-class _PlayButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton.icon(
-      style: ElevatedButton.styleFrom(
-          primary: Colors.transparent,
-          side: BorderSide(width: 1.0, color: Colors.white),
-          elevation: 10.0),
-      //padding: const EdgeInsets.fromLTRB(15.0, 5.0, 20.0, 5.0),
-      onPressed: () => print("Play"),
-      //color: Colors.white,
-      icon: const Icon(
-        Icons.play_arrow,
-        size: 30.0,
-      ),
-      label: const Text(
-        'Play',
-        style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w600),
-      ),
-    );
   }
 }

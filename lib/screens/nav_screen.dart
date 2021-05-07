@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_netflix_responsive_ui/assets.dart';
 import 'package:flutter_netflix_responsive_ui/cubits/cubits.dart';
+import 'package:flutter_netflix_responsive_ui/data/data.dart';
 import 'package:flutter_netflix_responsive_ui/screens/screens.dart';
+import 'package:flutter_netflix_responsive_ui/screens/selection_screen.dart';
 import 'package:flutter_netflix_responsive_ui/widgets/widgets.dart';
 
 class NavScreen extends StatefulWidget {
@@ -13,16 +15,14 @@ class NavScreen extends StatefulWidget {
 class _NavScreenState extends State<NavScreen> {
   final List<Widget> _screens = [
     HomeScreen(key: PageStorageKey('homeScreen')),
-    Scaffold(),
-    VPlayer(),
-    Scaffold(),
+    SearchScreen(),
+    SearchScreen(),
     Scaffold(),
   ];
 
   final Map<String, IconData> _icons = const {
     'Home': Icons.home,
     'Search': Icons.search,
-    'Player': Icons.play_arrow,
     'Downlaods': Icons.file_download,
     'More': Icons.menu,
   };

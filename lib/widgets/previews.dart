@@ -5,18 +5,28 @@ import 'package:flutter_netflix_responsive_ui/screens/screens.dart';
 class Previews extends StatelessWidget {
   final String title;
   final List<Content> contentList;
+  //static const routeName = '/video';
 
   const Previews({Key key, this.title, this.contentList}) : super(key: key);
 
-  void selectPreview(BuildContext ctx, String vUrl) {
+  void selectPreview(BuildContext ctx, String vUrl, String vName) {
     Navigator.of(ctx).push(
       MaterialPageRoute(
         builder: (_) {
-          return VPlayer(videoURL: vUrl);
+          return VPlayer(
+            videoURL: vUrl,
+            videoName: vName,
+          );
         },
       ),
     );
   }
+  // void selectPreview(BuildContext ctx, String vUrl, String vName) {
+  //   Navigator.of(ctx).pushNamed(
+  //     routeName,
+  //     arguments: {'videoUrl': vUrl, 'videoName': vName},
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +37,7 @@ class Previews extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
           child: Text(
             title,
-            style: TextStyle(
-                color: Colors.white,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold),
+            style: Theme.of(context).textTheme.headline4,
           ),
         ),
         Container(
@@ -43,7 +50,8 @@ class Previews extends StatelessWidget {
               itemBuilder: (BuildContext content, int index) {
                 final Content content = contentList[index];
                 return GestureDetector(
-                    onTap: () => selectPreview(context, content.videoUrl),
+                    onTap: () =>
+                        selectPreview(context, content.videoUrl, content.name),
                     child: Stack(
                       alignment: Alignment.center,
                       children: [
@@ -87,12 +95,8 @@ class Previews extends StatelessWidget {
                           child: SizedBox(
                             height: 70.0,
                             child: Center(
-                              child: Text(
-                                content.name,
-                                style: const TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w600),
-                              ),
+                              child: Text(content.name,
+                                  style: Theme.of(context).textTheme.headline6),
                             ),
                             // child: Image.asset(content.titleImageUrl),
                           ),

@@ -1,12 +1,15 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_netflix_responsive_ui/assets.dart';
+import 'package:flutter_netflix_responsive_ui/data/data.dart';
+import 'package:flutter_netflix_responsive_ui/models/models.dart';
+import 'package:flutter_netflix_responsive_ui/screens/screens.dart';
+import 'package:flutter_netflix_responsive_ui/screens/selection_screen.dart';
 import 'package:flutter_netflix_responsive_ui/widgets/widgets.dart';
 
 class CustomAppBar extends StatelessWidget {
   final double scrollOffset;
-
   const CustomAppBar({Key key, this.scrollOffset = 0.0}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -18,7 +21,7 @@ class CustomAppBar extends StatelessWidget {
             .withOpacity((scrollOffset / 350).clamp(0, 1).toDouble()),
         child: Responsive(
           mobile: _CustomAppBarMobile(),
-          desktop: _CustomAppBarDesktop(),
+          desktop: CustomAppBarDesktop(),
         ));
   }
 }
@@ -26,6 +29,24 @@ class CustomAppBar extends StatelessWidget {
 class _CustomAppBarMobile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    void selectTVScreen(BuildContext ctx) {
+      Navigator.of(ctx).push(MaterialPageRoute(builder: (_) {
+        return SelectionScreen(list: alldata, listName: "TV Shows");
+      }));
+    }
+
+    void selectMovieScreen(BuildContext ctx) {
+      Navigator.of(ctx).push(MaterialPageRoute(builder: (_) {
+        return SelectionScreen(list: originals, listName: "Movies");
+      }));
+    }
+
+    void selectMyListScreen(BuildContext ctx) {
+      Navigator.of(ctx).push(MaterialPageRoute(builder: (_) {
+        return SelectionScreen(list: myList1, listName: "My List");
+      }));
+    }
+
     return SafeArea(
       child: Row(
         children: [
@@ -39,15 +60,15 @@ class _CustomAppBarMobile extends StatelessWidget {
               children: [
                 _AppBarButton(
                   title: "TV Shows",
-                  onTap: () => print("TV Show"),
+                  onTap: () => selectTVScreen(context),
                 ),
                 _AppBarButton(
                   title: "Movies",
-                  onTap: () => print("TV Show"),
+                  onTap: () => selectMovieScreen(context),
                 ),
                 _AppBarButton(
                   title: "My List",
-                  onTap: () => print("My List"),
+                  onTap: () => selectMyListScreen(context),
                 ),
               ],
             ),
@@ -58,7 +79,15 @@ class _CustomAppBarMobile extends StatelessWidget {
   }
 }
 
-class _CustomAppBarDesktop extends StatelessWidget {
+class CustomAppBarDesktop extends StatelessWidget {
+  static const routeName = '/search';
+
+  void goSearch(BuildContext ctx) {
+    Navigator.of(ctx).pushNamed(
+      routeName,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -105,7 +134,7 @@ class _CustomAppBarDesktop extends StatelessWidget {
                   icon: Icon(Icons.search),
                   iconSize: 28.0,
                   color: Colors.white,
-                  onPressed: () => print("Search"),
+                  onPressed: () => goSearch(context),
                 ),
                 _AppBarButton(
                   title: "KIDS",
@@ -148,12 +177,7 @@ class _AppBarButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Text(title,
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 16.0,
-            fontWeight: FontWeight.w600,
-          )),
+      child: Text(title, style: Theme.of(context).textTheme.headline6),
     );
   }
 }

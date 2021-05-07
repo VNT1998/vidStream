@@ -3,8 +3,8 @@ import 'package:video_player/video_player.dart';
 
 class VPlayer extends StatefulWidget {
   final String videoURL;
-
-  const VPlayer({Key key, this.videoURL}) : super(key: key);
+  final String videoName;
+  const VPlayer({Key key, this.videoURL, this.videoName}) : super(key: key);
   @override
   _VPlayerState createState() => _VPlayerState();
 }
@@ -12,16 +12,6 @@ class VPlayer extends StatefulWidget {
 class _VPlayerState extends State<VPlayer> {
   VideoPlayerController _videoController;
   int _playbackTime = 0;
-
-  void _initPlayer() {
-    // _videoController = VideoPlayerController.network(
-    //     "http://192.168.0.7:8000/The Big Bang Theory S07E01 The Hofstadter Insufficiency.mkv");
-    _videoController = VideoPlayerController.network(widget.videoURL);
-    // _videoController = VideoPlayerController.network(
-    //     "https://www.rmp-streaming.com/media/big-buck-bunny-360p.mp4");
-    _videoController.initialize();
-    setState(() {});
-  }
 
   @override
   void initState() {
@@ -34,10 +24,33 @@ class _VPlayerState extends State<VPlayer> {
     });
   }
 
+  void _initPlayer() {
+    // _videoController = VideoPlayerController.network(
+    //     "http://192.168.0.7:8000/The Big Bang Theory S07E01 The Hofstadter Insufficiency.mkv");
+    _videoController = VideoPlayerController.network(widget.videoURL);
+    print(widget.videoURL);
+    // _videoController = VideoPlayerController.network(
+    //     "https://www.rmp-streaming.com/media/big-buck-bunny-360p.mp4");
+    _videoController.initialize();
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
+    // final routeArgs =
+    //     ModalRoute.of(context).settings.arguments as Map<String, String>;
+    // final videoUrl = routeArgs['videoUrl'];
+    // final videoName = routeArgs['videoName'];
+    // widget.videoURL = videoUrl;
+
     return Scaffold(
       backgroundColor: Colors.black,
+      appBar: AppBar(
+        title: Text(
+          widget.videoName,
+          style: Theme.of(context).textTheme.headline6,
+        ),
+      ),
       //body: _playerWidget(),
       body: Center(
           child: _videoController.value.isInitialized

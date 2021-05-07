@@ -19,10 +19,7 @@ class ContentList extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
           child: Text(
             title,
-            style: TextStyle(
-                color: Colors.white,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold),
+            style: Theme.of(context).textTheme.headline4,
           ),
         ),
         Container(
