@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_netflix_responsive_ui/screens/selection_screen.dart';
 import 'package:flutter_netflix_responsive_ui/widgets/custom_app_bar.dart';
 import './screens/screens.dart';
 
@@ -40,7 +41,9 @@ class MyApp extends StatelessWidget {
       // home: NavScreen(),
       routes: {
         '/': (ctx) => NavScreen(),
+        CustomAppBarDesktop.routeName: (ctx) => SearchScreen(),
         SearchScreen.routeName: (ctx) => NavScreen(),
+        SelectionScreen.routeName: (ctx) => NavScreen(),
         // Previews.routeName: (ctx) => VPlayer(),
       },
     );

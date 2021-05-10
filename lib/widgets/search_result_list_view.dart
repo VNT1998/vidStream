@@ -13,13 +13,15 @@ class SearchResultsListView extends StatelessWidget {
     @required this.data1,
   }) : super(key: key);
 
-  void selectPreview(BuildContext ctx, String vUrl, String vName) {
+  void selectPreview(
+      BuildContext ctx, String vUrl, String vName, String imageUrl) {
     Navigator.of(ctx).push(
       MaterialPageRoute(
         builder: (_) {
           return VPlayer(
             videoURL: vUrl,
             videoName: vName,
+            imageURL: imageUrl,
           );
         },
       ),
@@ -83,13 +85,18 @@ class SearchResultsListView extends StatelessWidget {
                         children: [
                           GestureDetector(
                             onTap: () => selectPreview(
-                                context, temp3[indexImage], displayData[index]),
+                                context,
+                                temp3[indexImage],
+                                displayData[index],
+                                temp2[indexImage]),
                             child: Container(
                               margin:
                                   const EdgeInsets.symmetric(horizontal: 16.0),
                               height: 200,
                               width: 130,
                               decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5)),
                                 image: DecorationImage(
                                   image: AssetImage(temp2[indexImage]),
                                   fit: BoxFit.cover,

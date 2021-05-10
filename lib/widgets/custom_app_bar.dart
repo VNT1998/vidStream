@@ -31,13 +31,13 @@ class _CustomAppBarMobile extends StatelessWidget {
   Widget build(BuildContext context) {
     void selectTVScreen(BuildContext ctx) {
       Navigator.of(ctx).push(MaterialPageRoute(builder: (_) {
-        return SelectionScreen(list: alldata, listName: "TV Shows");
+        return SelectionScreen(list: originals, listName: "TV Shows");
       }));
     }
 
     void selectMovieScreen(BuildContext ctx) {
       Navigator.of(ctx).push(MaterialPageRoute(builder: (_) {
-        return SelectionScreen(list: originals, listName: "Movies");
+        return SelectionScreen(list: alldata, listName: "Movies");
       }));
     }
 
@@ -90,6 +90,24 @@ class CustomAppBarDesktop extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void selectTVScreen(BuildContext ctx) {
+      Navigator.of(ctx).push(MaterialPageRoute(builder: (_) {
+        return SelectionScreen(list: originals, listName: "TV Shows");
+      }));
+    }
+
+    void selectMovieScreen(BuildContext ctx) {
+      Navigator.of(ctx).push(MaterialPageRoute(builder: (_) {
+        return SelectionScreen(list: alldata, listName: "Movies");
+      }));
+    }
+
+    void selectMyListScreen(BuildContext ctx) {
+      Navigator.of(ctx).push(MaterialPageRoute(builder: (_) {
+        return SelectionScreen(list: myList1, listName: "My List");
+      }));
+    }
+
     return SafeArea(
       child: Row(
         children: [
@@ -101,17 +119,17 @@ class CustomAppBarDesktop extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                _AppBarButton(
-                  title: "Home",
-                  onTap: () => print("Home"),
-                ),
+                // _AppBarButton(
+                //   title: "Home",
+                //   onTap: () =>) ,
+                // ),
                 _AppBarButton(
                   title: "TV Shows",
-                  onTap: () => print("TV Show"),
+                  onTap: () => selectTVScreen(context),
                 ),
                 _AppBarButton(
                   title: "Movies",
-                  onTap: () => print("TV Show"),
+                  onTap: () => selectMovieScreen(context),
                 ),
                 _AppBarButton(
                   title: "Latest",
@@ -119,48 +137,56 @@ class CustomAppBarDesktop extends StatelessWidget {
                 ),
                 _AppBarButton(
                   title: "My List",
-                  onTap: () => print("My List"),
+                  onTap: () => selectMyListScreen(context),
                 ),
               ],
             ),
           ),
           const Spacer(),
+          // const SizedBox(
+          //   width: 400.0,
+          // ),
           Expanded(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                IconButton(
-                  padding: EdgeInsets.zero,
-                  icon: Icon(Icons.search),
-                  iconSize: 28.0,
-                  color: Colors.white,
-                  onPressed: () => goSearch(context),
-                ),
-                _AppBarButton(
-                  title: "KIDS",
-                  onTap: () => print("TV Show"),
-                ),
-                _AppBarButton(
-                  title: "DVD",
-                  onTap: () => print("TV Show"),
-                ),
-                IconButton(
-                  padding: EdgeInsets.zero,
-                  icon: Icon(Icons.card_giftcard),
-                  iconSize: 28.0,
-                  color: Colors.white,
-                  onPressed: () => print("Gift"),
-                ),
-                IconButton(
-                  padding: EdgeInsets.zero,
-                  icon: Icon(Icons.notifications),
-                  iconSize: 28.0,
-                  color: Colors.white,
-                  onPressed: () => print("Notifications"),
-                ),
-              ],
+            child:
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                //   children: [
+
+                // _AppBarButton(
+                //   title: "KIDS",
+                //   onTap: () => print("TV Show"),
+                // ),
+                // _AppBarButton(
+                //   title: "DVD",
+                //   onTap: () => print("TV Show"),
+                // ),
+                // IconButton(
+                //   padding: EdgeInsets.zero,
+                //   icon: Icon(Icons.card_giftcard),
+                //   iconSize: 28.0,
+                //   color: Colors.white,
+                //   onPressed: () => print("Gift"),
+                // ),
+                // IconButton(
+                //   padding: EdgeInsets.zero,
+                //   icon: Icon(Icons.notifications),
+                //   iconSize: 28.0,
+                //   color: Colors.white,
+                //   onPressed: () => print("Notifications"),
+                // ),
+                Align(
+              alignment: Alignment.topRight,
+              child: IconButton(
+                padding: EdgeInsets.zero,
+                icon: Icon(Icons.search),
+                iconSize: 28.0,
+                color: Colors.white,
+                onPressed: () => goSearch(context),
+              ),
             ),
           )
+          //   ],
+          // ),
         ],
       ),
     );

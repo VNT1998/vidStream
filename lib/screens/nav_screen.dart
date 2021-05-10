@@ -16,7 +16,7 @@ class _NavScreenState extends State<NavScreen> {
   final List<Widget> _screens = [
     HomeScreen(key: PageStorageKey('homeScreen')),
     SearchScreen(),
-    SearchScreen(),
+    Scaffold(),
     Scaffold(),
   ];
 

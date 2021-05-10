@@ -9,13 +9,15 @@ class Previews extends StatelessWidget {
 
   const Previews({Key key, this.title, this.contentList}) : super(key: key);
 
-  void selectPreview(BuildContext ctx, String vUrl, String vName) {
+  void selectPreview(
+      BuildContext ctx, String vUrl, String vName, String imageUrl) {
     Navigator.of(ctx).push(
       MaterialPageRoute(
         builder: (_) {
           return VPlayer(
             videoURL: vUrl,
             videoName: vName,
+            imageURL: imageUrl,
           );
         },
       ),
@@ -50,8 +52,8 @@ class Previews extends StatelessWidget {
               itemBuilder: (BuildContext content, int index) {
                 final Content content = contentList[index];
                 return GestureDetector(
-                    onTap: () =>
-                        selectPreview(context, content.videoUrl, content.name),
+                    onTap: () => selectPreview(context, content.videoUrl,
+                        content.name, content.imageUrl),
                     child: Stack(
                       alignment: Alignment.center,
                       children: [
