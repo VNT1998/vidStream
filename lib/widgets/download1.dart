@@ -7,7 +7,12 @@ import 'package:path_provider/path_provider.dart';
 class Download1 extends StatefulWidget {
   final String vUrl;
   final String imageUrl;
-  const Download1({Key key, @required this.vUrl, @required this.imageUrl})
+  final String title;
+  const Download1(
+      {Key key,
+      @required this.vUrl,
+      @required this.imageUrl,
+      @required this.title})
       : super(key: key);
 
   @override
@@ -37,7 +42,7 @@ class Download1State extends State<Download1> {
       print(dir);
       print(widget.imageUrl);
 
-      await dio.download(videoUrl, "${dir.path}/myimage.jpg",
+      await dio.download(videoUrl, "${dir.path}/${widget.title}.mp4",
           onReceiveProgress: (rec, total) {
         //rprint("Rec: $rec , Total: $total");
 

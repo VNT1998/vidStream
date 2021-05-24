@@ -6,5 +6,4 @@ export 'content_list.dart';
 export 'responsive.dart';
 export 'custom_icon_text_buttom.dart';
 export 'search_result_list_view.dart';
-export 'download.dart';
 export 'download1.dart';

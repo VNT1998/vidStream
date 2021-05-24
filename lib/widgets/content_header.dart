@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_netflix_responsive_ui/assets.dart';
 import 'package:flutter_netflix_responsive_ui/models/content_model.dart';
+import 'package:flutter_netflix_responsive_ui/screens/screens.dart';
 import 'package:video_player/video_player.dart';
 
 import 'widgets.dart';
@@ -63,6 +65,17 @@ class __CustomHeaderMobileState extends State<_CustomHeaderMobile> {
 
   @override
   Widget build(BuildContext context) {
+    void playVideo(
+        BuildContext ctx, String vUrl, String vName, String imageUrl) {
+      Navigator.of(ctx).push(MaterialPageRoute(builder: (_) {
+        return VPlayer(
+          videoURL: vUrl,
+          videoName: vName,
+          imageURL: imageUrl,
+        );
+      }));
+    }
+
     return Stack(
       alignment: Alignment.center,
       children: [
@@ -100,7 +113,12 @@ class __CustomHeaderMobileState extends State<_CustomHeaderMobile> {
                     icon: Icons.add,
                     title: 'List',
                     onTap: () => print("Mylist")),
-                CustomIconTextButton(iconName: Icons.play_arrow, title: "Play"),
+                CustomIconTextButton(
+                  iconName: Icons.play_arrow,
+                  title: "Play",
+                  onPressed: () => playVideo(context, Assets.sintelVideoUrl,
+                      Assets.sintelTitle, Assets.sintel),
+                ),
                 VerticalIconButton(
                     icon: Icons.info_outline,
                     title: 'Info',

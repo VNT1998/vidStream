@@ -14,30 +14,37 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Netflix UI',
       debugShowCheckedModeBanner: false, //removing the debug banner at the top
       theme: ThemeData(
-          primarySwatch: Colors.grey,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-          scaffoldBackgroundColor: Colors.black,
-          textTheme: ThemeData.light().textTheme.copyWith(
-                bodyText2: TextStyle(color: Colors.white),
-                bodyText1: TextStyle(color: Colors.white),
-                headline6: TextStyle(
+        primarySwatch: Colors.grey,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+        scaffoldBackgroundColor: Colors.black,
+        textTheme: ThemeData.light().textTheme.copyWith(
+              bodyText2: TextStyle(color: Colors.white),
+              bodyText1: TextStyle(color: Colors.white),
+              headline6: TextStyle(
+                fontFamily: 'RobotoCondensed',
+                fontSize: 16.0,
+                fontWeight: FontWeight.w600,
+                color: Colors.white,
+              ),
+              headline5: TextStyle(
+                fontFamily: 'Raleway',
+                fontSize: 16.0,
+                fontWeight: FontWeight.w600,
+                color: Colors.white,
+              ),
+              headline4: TextStyle(
                   fontFamily: 'RobotoCondensed',
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.w600,
                   color: Colors.white,
-                ),
-                headline5: TextStyle(
-                  fontFamily: 'Raleway',
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.white,
-                ),
-                headline4: TextStyle(
-                    fontFamily: 'RobotoCondensed',
-                    color: Colors.white,
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.bold),
-              )),
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold),
+              headline3: TextStyle(
+                fontFamily: 'Raleway',
+                fontSize: 16.0,
+                color: Colors.white,
+              ),
+            ),
+      ),
+
       // home: NavScreen(),
       routes: {
         '/': (ctx) => NavScreen(),

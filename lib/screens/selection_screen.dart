@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_netflix_responsive_ui/models/content_model.dart';
+import 'package:flutter_netflix_responsive_ui/screens/screens.dart';
 import 'package:flutter_netflix_responsive_ui/widgets/responsive.dart';
 
 class SelectionScreen extends StatelessWidget {
@@ -40,6 +41,17 @@ class SelectionScreenMobile extends StatelessWidget {
       );
     }
 
+    void playVideo(
+        BuildContext ctx, String vUrl, String vName, String imageUrl) {
+      Navigator.of(ctx).push(MaterialPageRoute(builder: (_) {
+        return VPlayer(
+          videoURL: vUrl,
+          videoName: vName,
+          imageURL: imageUrl,
+        );
+      }));
+    }
+
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () => goHome(context),
@@ -71,16 +83,20 @@ class SelectionScreenMobile extends StatelessWidget {
             // mainAxisSpacing: 0,
           ),
           itemBuilder: (BuildContext context, int index) {
-            return Container(
-              height: 200,
-              width: 130,
-              //padding: EdgeInsets.all(),
-              margin: EdgeInsets.all(2),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(13)),
-                  image: DecorationImage(
-                      image: AssetImage(list[index].imageUrl),
-                      fit: BoxFit.cover)),
+            return GestureDetector(
+              onTap: () => playVideo(context, list[index].videoUrl,
+                  'list[index].titleImageUrl', list[index].imageUrl),
+              child: Container(
+                height: 200,
+                width: 130,
+                //padding: EdgeInsets.all(),
+                margin: EdgeInsets.all(2),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(13)),
+                    image: DecorationImage(
+                        image: AssetImage(list[index].imageUrl),
+                        fit: BoxFit.cover)),
+              ),
             );
           }),
     );
@@ -100,6 +116,17 @@ class SelectionScreenDesktop extends StatelessWidget {
       Navigator.of(ctx).pushNamed(
         routeName,
       );
+    }
+
+    void playVideo(
+        BuildContext ctx, String vUrl, String vName, String imageUrl) {
+      Navigator.of(ctx).push(MaterialPageRoute(builder: (_) {
+        return VPlayer(
+          videoURL: vUrl,
+          videoName: vName,
+          imageURL: imageUrl,
+        );
+      }));
     }
 
     return Scaffold(
@@ -133,17 +160,20 @@ class SelectionScreenDesktop extends StatelessWidget {
             // mainAxisSpacing: 0,
           ),
           itemBuilder: (BuildContext context, int index) {
-            return Container(
-              height: 200,
-              width: 130,
-              //padding: EdgeInsets.all(),
-              margin: EdgeInsets.all(2),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(13)),
-                  image: DecorationImage(
-                      image: AssetImage(list[index].imageUrl),
-                      fit: BoxFit.cover)),
-            );
+            return GestureDetector(
+                onTap: () => playVideo(context, list[index].videoUrl,
+                    'list[index].titleImageUrl', list[index].imageUrl),
+                child: Container(
+                  height: 200,
+                  width: 130,
+                  //padding: EdgeInsets.all(),
+                  margin: EdgeInsets.all(2),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(13)),
+                      image: DecorationImage(
+                          image: AssetImage(list[index].imageUrl),
+                          fit: BoxFit.cover)),
+                ));
           }),
     );
   }

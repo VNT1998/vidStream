@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 class CustomIconTextButton extends StatelessWidget {
   final String title;
   final IconData iconName;
-  final Function onPrssed;
+  final Function onPressed;
   const CustomIconTextButton(
-      {Key key, @required this.title, @required this.iconName, this.onPrssed})
+      {Key key, @required this.title, @required this.iconName, this.onPressed})
       : super(key: key);
 
   @override
@@ -25,7 +25,7 @@ class CustomIconTextButton extends StatelessWidget {
             side: BorderSide(width: 0, color: Colors.white),
             elevation: 10.0),
         //padding: const EdgeInsets.fromLTRB(15.0, 5.0, 20.0, 5.0),
-        onPressed: () => print(title),
+        onPressed: () => onPressed(),
         //color: Colors.white,
         icon: Icon(
           iconName,

@@ -19,6 +19,7 @@ class VPlayer extends StatefulWidget {
           return Download1(
             vUrl: videoURL,
             imageUrl: imageURL,
+            title: videoName,
           );
         },
       ),

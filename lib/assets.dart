@@ -1,6 +1,6 @@
 class Assets {
   static const String _images = 'assets/images/';
-  static const String _ip = 'http://192.168.0.7:8000/';
+  static const String _ip = 'http://192.168.0.6:8000/';
 
   static const String netflixLogo0 = '${_images}netflix_logo0.png';
   static const String netflixLogo1 = '${_images}netflix_logo1.png';
